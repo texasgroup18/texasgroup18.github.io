@@ -9,16 +9,39 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      text-align: center;
       background: #f8f9fa;
+      color: #333;
     }
     header {
       background: #343a40;
       color: white;
-      padding: 20px;
+      padding: 15px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    h1 {
+    header h1 {
       margin: 0;
+      font-size: 24px;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
     }
     .grid {
       display: grid;
@@ -50,9 +73,10 @@
     }
     footer {
       margin-top: 30px;
-      padding: 10px;
+      padding: 15px;
       background: #343a40;
       color: white;
+      text-align: center;
     }
   </style>
 </head>
@@ -60,42 +84,74 @@
 
   <header>
     <h1>Texas Group</h1>
-    <p>Team Members</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#team">Team</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
-  <h2>Signing Authorities</h2>
-  <div class="grid">
-    <div class="card">
-      <img src="images/DarpanS.jpg" alt="Darpan Shinde">
-      <div class="name">Darpan Shinde</div>
-      <div class="role">Signing Authority</div>
-    </div>
-    <div class="card">
-      <img src="images/VinayJ.jpg" alt="Vinay Jadhav">
-      <div class="name">Vinay Jadhav</div>
-      <div class="role">Signing Authority</div>
-    </div>
-  </div>
+  <section id="about">
+    <h2>About Us</h2>
+    <p>Texas Group is a collaborative partnership of 18 professionals working together 
+       with dedication, innovation, and unity. Our vision is to create value through 
+       teamwork and trust.</p>
+  </section>
 
-  <h2>Partners</h2>
-  <div class="grid">
-    <div class="card"><img src="images/AkshayK.jpg"><div class="name">Akshay Kemse</div><div class="role">Partner</div></div>
-    <div class="card"><img src="images/AkshayS.jpg"><div class="name">Akshay Sargar</div><div class="role">Partner</div></div>
-    <div class="card"><img src="images/AvinashP.jpg"><div class="name">Avinash Patil</div><div class="role">Partner</div></div>
-    <div class="card"><img src="images/KalidasS.jpg"><div class="name">Kalidas Shirke</div><div class="role">Partner</div></div>
-    <div class="card"><img src="images/KiranD.jpg"><div class="name">Kiran Dabhade</div><div class="role">Partner</div></div>
-    <div class="card"><img src="images/NeetinH.jpg"><div class="name">Neetin Hande</div><div class="role">Partner</div></div>
-    <div class="card"><img src="images/PankajS.jpg"><div class="name">Pankaj Shinde</div><div class="role">Partner</div></div>
-    <div class="card"><img src="images/PravinP.jpg"><div class="name">Pravin Pawar</div><div class="role">Partner</div></div>
-    <div class="card"><img src="images/RiteshS.jpg"><div class="name">Ritesh Sawardekar</div><div class="role">Partner</div></div>
-    <div class="card"><img src="images/RohanS.jpg"><div class="name">Rohan Sapte</div><div class="role">Partner</div></div>
-    <div class="card"><img src="images/SagarS.jpg"><div class="name">Sagar Sawant</div><div class="role">Partner</div></div>
-    <div class="card"><img src="images/ShankarS.jpg"><div class="name">Shankar Sargar</div><div class="role">Partner</div></div>
-    <div class="card"><img src="images/SurajJ.jpg"><div class="name">Suraj Joshi</div><div class="role">Partner</div></div>
-    <div class="card"><img src="images/SwapnilP.jpg"><div class="name">Swapnil Pawar</div><div class="role">Partner</div></div>
-    <div class="card"><img src="images/TusharD.jpg"><div class="name">Tushar Dhuri</div><div class="role">Partner</div></div>
-    <div class="card"><img src="images/VipulK.jpg"><div class="name">Vipul Kule</div><div class="role">Partner</div></div>
-  </div>
+  <section id="services" style="background:#e9ecef;">
+    <h2>Our Services</h2>
+    <p>We specialize in diverse business domains, providing:</p>
+    <ul style="list-style:none; padding:0;">
+      <li>✔ Business Consulting</li>
+      <li>✔ Financial Planning</li>
+      <li>✔ Technology Solutions</li>
+      <li>✔ Strategic Partnerships</li>
+    </ul>
+  </section>
+
+  <section id="team">
+    <h2>Signing Authorities</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="images/DarpanS.jpg" alt="Darpan Shinde">
+        <div class="name">Darpan Shinde</div>
+        <div class="role">Signing Authority</div>
+      </div>
+      <div class="card">
+        <img src="images/VinayJ.jpg" alt="Vinay Jadhav">
+        <div class="name">Vinay Jadhav</div>
+        <div class="role">Signing Authority</div>
+      </div>
+    </div>
+
+    <h2>Partners</h2>
+    <div class="grid">
+      <div class="card"><img src="images/AkshayK.jpg"><div class="name">Akshay Kemse</div><div class="role">Partner</div></div>
+      <div class="card"><img src="images/AkshayS.jpg"><div class="name">Akshay Sargar</div><div class="role">Partner</div></div>
+      <div class="card"><img src="images/AvinashP.jpg"><div class="name">Avinash Patil</div><div class="role">Partner</div></div>
+      <div class="card"><img src="images/KalidasS.jpg"><div class="name">Kalidas Shirke</div><div class="role">Partner</div></div>
+      <div class="card"><img src="images/KiranD.jpg"><div class="name">Kiran Dabhade</div><div class="role">Partner</div></div>
+      <div class="card"><img src="images/NeetinH.jpg"><div class="name">Neetin Hande</div><div class="role">Partner</div></div>
+      <div class="card"><img src="images/PankajS.jpg"><div class="name">Pankaj Shinde</div><div class="role">Partner</div></div>
+      <div class="card"><img src="images/PravinP.jpg"><div class="name">Pravin Pawar</div><div class="role">Partner</div></div>
+      <div class="card"><img src="images/RiteshS.jpg"><div class="name">Ritesh Sawardekar</div><div class="role">Partner</div></div>
+      <div class="card"><img src="images/RohanS.jpg"><div class="name">Rohan Sapte</div><div class="role">Partner</div></div>
+      <div class="card"><img src="images/SagarS.jpg"><div class="name">Sagar Sawant</div><div class="role">Partner</div></div>
+      <div class="card"><img src="images/ShankarS.jpg"><div class="name">Shankar Sargar</div><div class="role">Partner</div></div>
+      <div class="card"><img src="images/SurajJ.jpg"><div class="name">Suraj Joshi</div><div class="role">Partner</div></div>
+      <div class="card"><img src="images/SwapnilP.jpg"><div class="name">Swapnil Pawar</div><div class="role">Partner</div></div>
+      <div class="card"><img src="images/TusharD.jpg"><div class="name">Tushar Dhuri</div><div class="role">Partner</div></div>
+      <div class="card"><img src="images/VipulK.jpg"><div class="name">Vipul Kule</div><div class="role">Partner</div></div>
+    </div>
+  </section>
+
+  <section id="contact" style="background:#e9ecef;">
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:info@texasgroup.com">info@texasgroup.com</a></p>
+    <p>Phone: +91-9876543210</p>
+    <p>Address: Texas Group HQ, Mumbai, India</p>
+  </section>
 
   <footer>
     <p>© 2025 Texas Group | All Rights Reserved</p>
