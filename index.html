@@ -4,133 +4,102 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Texas Group</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background: #f8f9fa;
+    }
+    header {
+      background: #343a40;
+      color: white;
+      padding: 20px;
+    }
+    h1 {
+      margin: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 15px;
+    }
+    .card img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #007bff;
+    }
+    .name {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .role {
+      font-size: 14px;
+      color: #555;
+    }
+    footer {
+      margin-top: 30px;
+      padding: 10px;
+      background: #343a40;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-<header>
-  <h1>Texas Group</h1>
-  <p>Together We Can</p>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
 
-<!-- Home Section -->
-<section id="home">
-  <div class="card">
-    <h2>Welcome to Texas Group</h2>
-    <p>We are a team of 18 passionate members working together to create impact and build a better tomorrow.</p>
-  </div>
-</section>
+  <header>
+    <h1>Texas Group</h1>
+    <p>Team Members</p>
+  </header>
 
-<!-- About Section -->
-<section id="about">
-  <div class="card">
-    <h2>About Us</h2>
-    <p>Texas Group is built on collaboration, innovation, and trust. Together, we are stronger.</p>
-  </div>
-</section>
-
-<!-- Services Section -->
-<section id="services">
-  <div class="card">
-    <h2>Our Services</h2>
-    <p>We provide solutions in technology, consulting, and teamwork-driven initiatives.</p>
-  </div>
-</section>
-
-<!-- Contact / Team Section -->
-<section id="contact">
-  <div class="card">
-    <h2>Our Team</h2>
-    <div class="team-grid">
-
-      <div class="member"><div class="avatar">AK</div>Akshay Kemse</div>
-      <div class="member"><div class="avatar">AS</div>Akshay Sargar</div>
-      <div class="member"><div class="avatar">AP</div>Avinash Patil</div>
-      <div class="member"><div class="avatar">DS</div>Darpan Shinde</div>
-      <div class="member"><div class="avatar">KS</div>Kalidas Shirke</div>
-      <div class="member"><div class="avatar">KD</div>Kiran Dabhade</div>
-      <div class="member"><div class="avatar">NH</div>Neetin Hande</div>
-      <div class="member"><div class="avatar">PS</div>Pankaj Shinde</div>
-      <div class="member"><div class="avatar">PP</div>Pravin Pawar</div>
-      <div class="member"><div class="avatar">RS</div>Ritesh Sawardekar</div>
-      <div class="member"><div class="avatar">RS</div>Rohan Sapte</div>
-      <div class="member"><div class="avatar">SS</div>Sagar Sawant</div>
-      <div class="member"><div class="avatar">SS</div>Shankar Sargar</div>
-      <div class="member"><div class="avatar">SJ</div>Suraj Joshi</div>
-      <div class="member"><div class="avatar">SP</div>Swapnil Pawar</div>
-      <div class="member"><div class="avatar">TD</div>Tushar Dhuri</div>
-      <div class="member"><div class="avatar">VJ</div>Vinay Jadhav</div>
-      <div class="member"><div class="avatar">VK</div>Vipul Kule</div>
-
+  <h2>Signing Authorities</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="images/DarpanS.jpg" alt="Darpan Shinde">
+      <div class="name">Darpan Shinde</div>
+      <div class="role">Signing Authority</div>
+    </div>
+    <div class="card">
+      <img src="images/VinayJ.jpg" alt="Vinay Jadhav">
+      <div class="name">Vinay Jadhav</div>
+      <div class="role">Signing Authority</div>
     </div>
   </div>
 
-  <div class="card" style="margin-top:30px;">
-    <h2>Contact Us</h2>
-    <p><strong>Email:</strong> texasgroup18@gmail.com</p>
-    <p><strong>Phone:</strong> +91 8856967466</p>
-    <p><strong>Address:</strong> Nirman Viva, Pune, India</p>
+  <h2>Partners</h2>
+  <div class="grid">
+    <div class="card"><img src="images/AkshayK.jpg"><div class="name">Akshay Kemse</div><div class="role">Partner</div></div>
+    <div class="card"><img src="images/AkshayS.jpg"><div class="name">Akshay Sargar</div><div class="role">Partner</div></div>
+    <div class="card"><img src="images/AvinashP.jpg"><div class="name">Avinash Patil</div><div class="role">Partner</div></div>
+    <div class="card"><img src="images/KalidasS.jpg"><div class="name">Kalidas Shirke</div><div class="role">Partner</div></div>
+    <div class="card"><img src="images/KiranD.jpg"><div class="name">Kiran Dabhade</div><div class="role">Partner</div></div>
+    <div class="card"><img src="images/NeetinH.jpg"><div class="name">Neetin Hande</div><div class="role">Partner</div></div>
+    <div class="card"><img src="images/PankajS.jpg"><div class="name">Pankaj Shinde</div><div class="role">Partner</div></div>
+    <div class="card"><img src="images/PravinP.jpg"><div class="name">Pravin Pawar</div><div class="role">Partner</div></div>
+    <div class="card"><img src="images/RiteshS.jpg"><div class="name">Ritesh Sawardekar</div><div class="role">Partner</div></div>
+    <div class="card"><img src="images/RohanS.jpg"><div class="name">Rohan Sapte</div><div class="role">Partner</div></div>
+    <div class="card"><img src="images/SagarS.jpg"><div class="name">Sagar Sawant</div><div class="role">Partner</div></div>
+    <div class="card"><img src="images/ShankarS.jpg"><div class="name">Shankar Sargar</div><div class="role">Partner</div></div>
+    <div class="card"><img src="images/SurajJ.jpg"><div class="name">Suraj Joshi</div><div class="role">Partner</div></div>
+    <div class="card"><img src="images/SwapnilP.jpg"><div class="name">Swapnil Pawar</div><div class="role">Partner</div></div>
+    <div class="card"><img src="images/TusharD.jpg"><div class="name">Tushar Dhuri</div><div class="role">Partner</div></div>
+    <div class="card"><img src="images/VipulK.jpg"><div class="name">Vipul Kule</div><div class="role">Partner</div></div>
   </div>
-</section>
 
-<footer>
-  <p>© 2025 Texas Group. All rights reserved.</p>
-</footer>
-
-<!-- Inline CSS for Team Grid -->
-<style>
-  body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-  header { background: #0a4275; color: white; text-align: center; padding: 20px; }
-  nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-  nav a:hover { text-decoration: underline; }
-  section { padding: 40px 20px; }
-  .card { background: #fff; padding: 20px; margin: auto; max-width: 900px; border-radius: 10px; box-shadow: 0px 2px 6px rgba(0,0,0,0.2); }
-  .team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-  }
-  .member {
-    background: #f4f4f4;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: 1px solid #ddd;
-  }
-  .member:hover {
-    background: #0a4275;
-    color: white;
-    transform: scale(1.05);
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-  }
-  .avatar {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 10px;
-    border-radius: 50%;
-    background: #0a4275;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 18px;
-  }
-  .member:hover .avatar {
-    background: white;
-    color: #0a4275;
-  }
-  footer { background: #0a4275; color: white; text-align: center; padding: 15px; margin-top: 20px; }
-</style>
+  <footer>
+    <p>© 2025 Texas Group | All Rights Reserved</p>
+  </footer>
 
 </body>
 </html>
