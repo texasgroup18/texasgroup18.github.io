@@ -3,210 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Team - Texas Group</title>
+  <title>Texas Group - Contact</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #1a1a1a;
-      color: white;
-      margin: 0;
-      padding: 0;
-    }
-
-    .container {
-      width: 90%;
-      margin: auto;
-      padding: 40px 0;
-      text-align: center;
-    }
-
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 30px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 30px;
-    }
-
-    .member {
-      position: relative;
-      overflow: hidden;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
-      background: #222;
-      transition: transform 0.3s ease;
-    }
-
-    .member:hover {
-      transform: scale(1.05);
-    }
-
-    .member img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      border-radius: 15px;
-      display: block;
-    }
-
-    .member p {
-      margin: 10px 0;
-      font-weight: bold;
-    }
-
-    /* Overlay for Education */
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      font-size: 18px;
-      font-weight: bold;
-      border-radius: 15px;
-    }
-
-    .member:hover .overlay {
-      opacity: 1;
-    }
+    body { font-family: Arial, sans-serif; margin:0; padding:0; }
+    header { background:#333; color:white; padding:15px; text-align:center; }
+    nav a { color:white; margin:0 15px; text-decoration:none; }
+    nav a:hover { text-decoration:underline; }
+    .container { padding:40px; text-align:center; }
+    .info { font-size:18px; margin-top:20px; }
   </style>
 </head>
 <body>
+  <header>
+    <h1>Texas Group</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
   <div class="container">
-    <h2>Our Team</h2>
-    <div class="grid">
-
-      <div class="member">
-        <img src="images/DarpanS.jpg" alt="Darpan Shinde">
-        <div class="overlay">IT Engineer</div>
-        <p>Darpan Shinde (Signing Authority)</p>
-      </div>
-
-      <div class="member">
-        <img src="images/VinayJ.jpg" alt="Vinay Jadhav">
-        <div class="overlay">Civil Engineer</div>
-        <p>Vinay Jadhav (Signing Authority)</p>
-      </div>
-
-      <div class="member">
-        <img src="images/AkshayK.jpg" alt="Akshay Kemse">
-        <div class="overlay">Civil Engineer</div>
-        <p>Akshay Kemse</p>
-      </div>
-
-      <div class="member">
-        <img src="images/AkshayS.jpg" alt="Akshay Sargar">
-        <div class="overlay">Mechanical Engineer</div>
-        <p>Akshay Sargar</p>
-      </div>
-
-      <div class="member">
-        <img src="images/AvinashP.jpg" alt="Avinash Patil">
-        <div class="overlay">Mechanical Engineer</div>
-        <p>Avinash Patil</p>
-      </div>
-
-      <div class="member">
-        <img src="images/KalidasS.jpg" alt="Kalidas Shirke">
-        <div class="overlay">EXTC Engineer</div>
-        <p>Kalidas Shirke</p>
-      </div>
-
-      <div class="member">
-        <img src="images/KiranD.jpg" alt="Kiran Dabhade">
-        <div class="overlay">Civil Engineer</div>
-        <p>Kiran Dabhade</p>
-      </div>
-
-      <div class="member">
-        <img src="images/NeetinH.jpg" alt="Neetin Hande">
-        <div class="overlay">Civil Engineer</div>
-        <p>Neetin Hande</p>
-      </div>
-
-      <div class="member">
-        <img src="images/PankajS.jpg" alt="Pankaj Shinde">
-        <div class="overlay">Chemical Engineer</div>
-        <p>Pankaj Shinde</p>
-      </div>
-
-      <div class="member">
-        <img src="images/PravinP.jpg" alt="Pravin Pawar">
-        <div class="overlay">Civil Engineer</div>
-        <p>Pravin Pawar</p>
-      </div>
-
-      <div class="member">
-        <img src="images/RiteshS.jpg" alt="Ritesh Sawardekar">
-        <div class="overlay">Mechanical Engineer</div>
-        <p>Ritesh Sawardekar</p>
-      </div>
-
-      <div class="member">
-        <img src="images/RohanS.jpg" alt="Rohan Sapte">
-        <div class="overlay">Safety Engineer</div>
-        <p>Rohan Sapte</p>
-      </div>
-
-      <div class="member">
-        <img src="images/SagarS.jpg" alt="Sagar Sawant">
-        <div class="overlay">Civil Engineer</div>
-        <p>Sagar Sawant</p>
-      </div>
-
-      <div class="member">
-        <img src="images/ShankarS.jpg" alt="Shankar Sargar">
-        <div class="overlay">Chemical Engineer</div>
-        <p>Shankar Sargar</p>
-      </div>
-
-      <div class="member">
-        <img src="images/SurajJ.jpg" alt="Suraj Joshi">
-        <div class="overlay">Civil Engineer</div>
-        <p>Suraj Joshi</p>
-      </div>
-
-      <div class="member">
-        <img src="images/SwapnilP.jpg" alt="Swapnil Pawar">
-        <div class="overlay">Civil Engineer</div>
-        <p>Swapnil Pawar</p>
-      </div>
-
-      <div class="member">
-        <img src="images/TusharD.jpg" alt="Tushar Dhuri">
-        <div class="overlay">Civil Engineer</div>
-        <p>Tushar Dhuri</p>
-      </div>
-
-      <div class="member">
-        <img src="images/VipulK.jpg" alt="Vipul Kule">
-        <div class="overlay">Civil Engineer</div>
-        <p>Vipul Kule</p>
-      </div>
-
-    </div>
+    <h2>Contact Us</h2>
+    <p class="info">📧 Email: <a href="mailto:texasgroup18@gmail.com">texasgroup18@gmail.com</a></p>
+    <p class="info">📞 Phone: +91 8856967466</p>
   </div>
-  <section id="contact" class="contact">
-  <h2>Contact Us</h2>
-  <p>If you’d like to reach out, please use the official details below:</p>
-
-  <div class="contact-info">
-    <p><strong>Email:</strong> <a href="mailto:texasgroup18@gmail.com">texasgroup18@gmail.com</a></p>
-    <p><strong>Phone:</strong> <a href="tel:+918856967466">+91 8856967466</a></p>
-  </div>
-</section>
-
 </body>
 </html>
-
-
