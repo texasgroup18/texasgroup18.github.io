@@ -1,138 +1,159 @@
-/* Logo */
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 40px;
-  background: #004080;
-}
-
-.logo img {
-  height: 60px;
-  width: auto;
-}
-/* Reset and base styles */
+/* General Reset */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 body {
-  line-height: 1.6;
-  background: #f9f9f9;
-  color: #333;
+    background: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
 }
 
 /* Header */
 header {
-  background: #004080;
-  color: #fff;
-  padding: 15px 0;
+    background: #222;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-header nav ul {
-  display: flex;
-  justify-content: center;
-  list-style: none;
+header img {
+    height: 60px;
 }
 
-header nav ul li {
-  margin: 0 15px;
+nav ul {
+    list-style: none;
+    display: flex;
 }
 
-header nav ul li a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s;
+nav ul li {
+    margin-left: 20px;
 }
 
-header nav ul li a:hover {
-  color: #ffcc00;
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
-/* Section styling */
-.section {
-  padding: 50px 20px;
-  max-width: 1100px;
-  margin: auto;
+nav ul li a:hover {
+    color: #ff4500;
 }
 
-h1, h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #004080;
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(to right, #0077b6, #00b4d8);
+    color: white;
 }
 
-/* Team Grid */
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
 }
 
-.team-member {
-  position: relative;
-  text-align: center;
-  background: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease;
+.hero p {
+    font-size: 1.2rem;
 }
 
-.team-member img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
+/* Team Section */
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
 }
 
-.team-member h3 {
-  margin-top: 10px;
-  font-size: 18px;
-  color: #004080;
+.container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #222;
 }
 
-/* Hover overlay */
-.member-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 64, 128, 0.9);
-  color: #fff;
-  padding: 15px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
 }
 
-.team-member:hover .member-info {
-  opacity: 1;
+.member {
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s;
 }
 
-.team-member:hover {
-  transform: translateY(-5px);
+.member img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
 }
 
-/* Contact */
-.contact-info {
-  text-align: center;
-  font-size: 18px;
+.member p {
+    padding: 10px;
+    font-weight: bold;
 }
 
-.contact-info p {
-  margin: 10px 0;
+/* Hover Overlay for Education */
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    padding: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    font-size: 0.9rem;
+}
+
+.member:hover {
+    transform: translateY(-5px);
+}
+
+.member:hover .overlay {
+    opacity: 1;
+}
+
+/* About & Services Page */
+.page-content {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.page-content h2 {
+    margin-bottom: 15px;
+    font-size: 2rem;
+    color: #222;
+}
+
+.page-content p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #555;
 }
 
 /* Footer */
 footer {
-  background: #004080;
-  color: #fff;
-  text-align: center;
-  padding: 15px 0;
-  margin-top: 30px;
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 15px 10px;
+    margin-top: 40px;
 }
