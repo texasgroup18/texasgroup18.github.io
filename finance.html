@@ -1,86 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Texas Group – Finance</title>
-  <link rel="stylesheet" href="style.css"/>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Tracker</title>
   <style>
-    /* Finance Page Custom Styling */
-    .finance {
-      max-width: 1200px;
-      margin: 24px auto;
-      padding: 0 16px;
-    }
-    .finance h2 {
-      margin-top: 40px;
-      font-size: 1.6em;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f6f8;
       color: #333;
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 8px;
     }
-    .sheet-frame {
+    header {
+      background: #1976d2;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.5em;
+    }
+    section {
+      margin: 20px auto;
+      max-width: 95%;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    h2 {
+      margin-top: 0;
+      color: #1976d2;
+    }
+    iframe {
       width: 100%;
+      height: 500px;
       border: none;
-      height: 420px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      margin: 16px 0 32px 0;
       border-radius: 8px;
-      background: #fff;
-    }
-    @media (max-width: 800px) {
-      .sheet-frame { height: 320px; }
+      overflow: hidden;
     }
   </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
-    <div class="header-left">
-      <img src="images/logo.JPG" alt="Texas Group Logo" class="logo" />
-      <h1>Texas Group</h1>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="finance.html" class="active">Finance</a></li>
-      </ul>
-    </nav>
+    Finance Tracker
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h2>Finance Records</h2>
-    <p>Together We Can</p>
-  </section>
-
-  <!-- Finance Data -->
-  <section class="finance">
+  <section>
     <h2>Fines</h2>
-    <iframe class="sheet-frame"
-      src="https://docs.google.com/spreadsheets/d/1BQDgQ6el4w5jVk9ZicxxadQYhNI6RfEvYWDc0WKUkKw/pubhtml?gid=0&single=true&widget=true&headers=false">
-    </iframe>
-
-    <h2>Expenses</h2>
-    <iframe class="sheet-frame"
-      src="https://docs.google.com/spreadsheets/d/1BQDgQ6el4w5jVk9ZicxxadQYhNI6RfEvYWDc0WKUkKw/pubhtml?gid=715722052&single=true&widget=true&headers=false">
-    </iframe>
-
-    <h2>Contributions</h2>
-    <iframe class="sheet-frame"
-      src="https://docs.google.com/spreadsheets/d/1BQDgQ6el4w5jVk9ZicxxadQYhNI6RfEvYWDc0WKUkKw/pubhtml?gid=2096610384&single=true&widget=true&headers=false">
-    </iframe>
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pubhtml?gid=0&single=true"></iframe>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>📧 Email: texasgroup18@gmail.com | 📞 Contact: 8856967466</p>
-    <p>&copy; 2025 Texas Group. All Rights Reserved.</p>
-  </footer>
+  <section>
+    <h2>Expenses</h2>
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pubhtml?gid=715722052&single=true"></iframe>
+  </section>
+
+  <section>
+    <h2>Contributions</h2>
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pubhtml?gid=2096610384&single=true"></iframe>
+  </section>
 
 </body>
 </html>
