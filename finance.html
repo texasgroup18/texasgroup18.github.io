@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finance Details - Texas Group</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Finance - Texas Group</title>
+<link rel="stylesheet" href="style.css"/>
 <style>
-  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; }
-  header, footer { background: #004aad; color: white; text-align: center; padding: 20px; }
-  header img { height: 50px; vertical-align: middle; margin-right: 10px; }
-  header h1 { display: inline; font-size: 24px; vertical-align: middle; }
-  header p { margin: 5px 0 0 0; font-size: 14px; }
   table { border-collapse: collapse; width: 95%; max-width: 1000px; margin: 30px auto; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
   th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
   th { background-color: #e0e0e0; }
@@ -30,14 +26,29 @@
 </head>
 <body>
 
+<!-- Header -->
 <header>
-  <img src="images/logo.JPG" alt="Texas Group Logo">
-  <h1>Texas Group</h1>
-  <p>Together We Can</p>
+  <div class="header-left">
+    <img src="images/logo.JPG" alt="Texas Group Logo" class="logo" />
+    <h1>Texas Group</h1>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="finance.html" style="text-decoration: underline;">Finance</a></li>
+    </ul>
+  </nav>
 </header>
 
-<h2 style="text-align:center; margin-top:20px;">Finance Details</h2>
+<!-- Hero -->
+<section class="hero">
+  <h2>Finance Details</h2>
+  <p>Together We Can</p>
+</section>
 
+<!-- Finance Table -->
 <table id="finance-table">
   <thead>
     <tr>
@@ -60,12 +71,14 @@
   </tfoot>
 </table>
 
+<!-- Footer -->
 <footer>
-  &copy; 2025 Texas Group. All rights reserved.
+  <p>📧 Email: texasgroup18@gmail.com | 📞 Contact: 8856967466</p>
+  <p>&copy; 2025 Texas Group. All Rights Reserved.</p>
 </footer>
 
 <script>
-// Use Google Sheet CSV export link
+// Google Sheet CSV export
 const sheetID = "1BQDgQ6el4w5jVk9ZicxxadQYhNI6RfEvYWDc0WKUkKw";
 const gid = "715722052";
 const csvUrl = `https://docs.google.com/spreadsheets/d/${sheetID}/export?format=csv&gid=${gid}`;
