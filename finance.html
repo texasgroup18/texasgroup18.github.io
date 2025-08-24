@@ -5,10 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Texas Group - Finance</title>
   <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* Light helpers so it looks clean even without extra CSS changes */
+    .finance { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
+    .finance h2 { margin-top: 32px; }
+    .table-tools { display: flex; gap: 12px; align-items: center; margin: 12px 0; }
+    .table-tools input { padding: 8px 10px; border: 1px solid #ccc; border-radius: 8px; max-width: 260px; width: 100%; }
+    table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 0 8px rgba(0,0,0,.06); }
+    th, td { border: 1px solid #e5e5e5; padding: 8px 10px; text-align: center; }
+    thead th { background: #f6f6f6; cursor: pointer; user-select: none; }
+    tbody tr:hover { background: #fafafa; }
+    .loading { padding: 12px; text-align: center; color: #666; }
+    @media (max-width: 800px) { .finance { padding: 16px 8px; } th, td { font-size: 12px; padding: 6px; } }
+  </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Header (same as index.html) -->
   <header>
     <div class="header-left">
       <img src="images/logo.JPG" alt="Texas Group Logo" class="logo" />
@@ -24,95 +37,242 @@
     </nav>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero (same look) -->
   <section class="hero">
     <h2>Finance Records</h2>
-    <p>Track fines, expenses, and contributions</p>
+    <p>Together We Can</p>
   </section>
 
   <!-- Finance Tables -->
   <section class="finance">
+    <!-- Fines -->
     <h2>Fine Records</h2>
-    <table>
+    <div class="table-tools">
+      <input id="fines-search" type="search" placeholder="Search name / month…" />
+    </div>
+    <table id="fines-table">
       <thead>
         <tr>
-          <th>Sr No</th>
-          <th>Name</th>
-          <th>Month</th>
-          <th>Amount</th>
+          <th data-sort="num">Sr No</th>
+          <th data-sort="text">Name</th>
+          <th data-sort="text">Month</th>
+          <th data-sort="num">Amount</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>1</td><td>Darpan Shinde</td><td>Jan 2025</td><td>500</td>
-        </tr>
-        <tr>
-          <td>2</td><td>Vinay Jadhav</td><td>Feb 2025</td><td>200</td>
-        </tr>
-      </tbody>
+      <tbody><tr><td colspan="4" class="loading">Loading fines…</td></tr></tbody>
     </table>
 
+    <!-- Expenses -->
     <h2>Expense Records</h2>
-    <table>
+    <div class="table-tools">
+      <input id="expenses-search" type="search" placeholder="Search purpose…" />
+    </div>
+    <table id="expenses-table">
       <thead>
         <tr>
-          <th>Sr No</th>
-          <th>Purpose</th>
-          <th>Amount</th>
+          <th data-sort="num">Sr No</th>
+          <th data-sort="text">Purpose</th>
+          <th data-sort="num">Amount</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>1</td><td>Picnic</td><td>3000</td>
-        </tr>
-        <tr>
-          <td>2</td><td>Snacks</td><td>1500</td>
-        </tr>
-      </tbody>
+      <tbody><tr><td colspan="3" class="loading">Loading expenses…</td></tr></tbody>
     </table>
 
+    <!-- Contributions -->
     <h2>Contribution Records</h2>
-    <table>
+    <div class="table-tools">
+      <input id="contrib-search" type="search" placeholder="Search name…" />
+    </div>
+    <table id="contrib-table">
       <thead>
-        <tr>
-          <th>Sr No</th>
-          <th>Name</th>
-          <th>Sept 2024</th>
-          <th>Oct 2024</th>
-          <th>Nov 2024</th>
-          <th>Dec 2024</th>
-          <th>Jan 2025</th>
-          <th>Feb 2025</th>
-          <th>Mar 2025</th>
-          <th>Apr 2025</th>
-          <th>May 2025</th>
-          <th>Jun 2025</th>
-          <th>Jul 2025</th>
-          <th>Aug 2025</th>
-        </tr>
+        <!-- Built dynamically from sheet header: Sr No, Name, Sept 2024 … Aug 2025 -->
       </thead>
-      <tbody>
-        <tr>
-          <td>1</td><td>Darpan Shinde</td>
-          <td>1000</td><td>1000</td><td>1000</td><td>1000</td>
-          <td>1000</td><td>1000</td><td>1000</td><td>1000</td>
-          <td>1000</td><td>1000</td><td>1000</td><td>1000</td>
-        </tr>
-        <tr>
-          <td>2</td><td>Vinay Jadhav</td>
-          <td>1000</td><td>1000</td><td>1000</td><td>1000</td>
-          <td>1000</td><td>1000</td><td>1000</td><td>1000</td>
-          <td>1000</td><td>1000</td><td>1000</td><td>1000</td>
-        </tr>
-      </tbody>
+      <tbody><tr><td class="loading">Loading contributions…</td></tr></tbody>
     </table>
   </section>
 
-  <!-- Footer -->
+  <!-- Footer (same as index.html) -->
   <footer>
     <p>📧 Email: texasgroup18@gmail.com | 📞 Contact: 8856967466</p>
     <p>&copy; 2025 Texas Group. All Rights Reserved.</p>
   </footer>
+
+<script>
+/* ===== CONFIG ===== */
+const SHEET_ID = "1BQDgQ6el4w5jVk9ZicxxadQYhNI6RfEvYWDc0WKUkKw";
+const GIDS = {
+  contributions: "715722052", // Contributions tab (given)
+  fines:        "0",          // 🔁 REPLACE with real Fines tab GID
+  expenses:     "123456789"   // 🔁 REPLACE with real Expenses tab GID
+};
+const NUM_PARTNERS = 18; // fixed
+
+/* ===== CSV HELPERS ===== */
+// robust CSV parser (quotes, commas)
+function parseCSV(text) {
+  const rows = [];
+  let row = [], cell = "", inQ = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i], n = text[i+1];
+    if (c === '"') {
+      if (inQ && n === '"') { cell += '"'; i++; } else { inQ = !inQ; }
+    } else if (c === ',' && !inQ) { row.push(cell.trim()); cell = ""; }
+    else if ((c === '\n' || c === '\r') && !inQ) { if (cell.length || row.length) { row.push(cell.trim()); rows.push(row); row = []; cell = ""; } }
+    else { cell += c; }
+  }
+  if (cell.length || row.length) { row.push(cell.trim()); rows.push(row); }
+  return rows.filter(r => r.some(v => v !== ""));
+}
+const toNum = v => {
+  const n = Number(String(v).replace(/[^0-9.+-]/g,""));
+  return Number.isFinite(n) ? n : 0;
+};
+const csvUrl = gid => `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`;
+
+/* ===== TABLE HELPERS ===== */
+function attachSearch(inputEl, tableEl) {
+  inputEl.addEventListener('input', () => {
+    const q = inputEl.value.trim().toLowerCase();
+    const trs = tableEl.tBodies[0].rows;
+    for (const tr of trs) {
+      const text = tr.innerText.toLowerCase();
+      tr.style.display = text.includes(q) ? "" : "none";
+    }
+  });
+}
+
+function sortTable(table, colIndex, type = "text", asc = true) {
+  const tbody = table.tBodies[0];
+  const rows = Array.from(tbody.rows).filter(r => !r.querySelector('.loading'));
+  const getVal = (tr) => tr.cells[colIndex]?.innerText || "";
+  rows.sort((a,b) => {
+    const av = getVal(a), bv = getVal(b);
+    if (type === "num") {
+      return (toNum(av) - toNum(bv)) * (asc ? 1 : -1);
+    } else {
+      return av.localeCompare(bv, undefined, {numeric: true, sensitivity: 'base'}) * (asc ? 1 : -1);
+    }
+  });
+  rows.forEach(r => tbody.appendChild(r));
+}
+
+function enableHeaderSorting(table) {
+  const ths = table.tHead?.rows[0]?.cells || [];
+  const sortState = {};
+  Array.from(ths).forEach((th, idx) => {
+    th.addEventListener('click', () => {
+      const type = th.dataset.sort || "text";
+      sortState[idx] = !sortState[idx]; // toggle
+      sortTable(table, idx, type, sortState[idx]);
+    });
+  });
+}
+
+/* ===== LOAD & RENDER ===== */
+async function loadCSV(gid) {
+  const res = await fetch(csvUrl(gid));
+  if (!res.ok) throw new Error("CSV fetch failed");
+  return parseCSV(await res.text());
+}
+
+function renderFines(rows) {
+  const table = document.getElementById('fines-table');
+  const tbody = table.tBodies[0];
+  tbody.innerHTML = "";
+  // Expect header: Sr No | Name | Month | Amount
+  rows.slice(1).forEach(r => {
+    if (!r.length) return;
+    const tr = document.createElement('tr');
+    const sr = r[0] || "";
+    const nm = r[1] || "";
+    const mo = r[2] || "";
+    const am = r[3] || "";
+    [sr,nm,mo,am].forEach(v => {
+      const td = document.createElement('td'); td.textContent = v; tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  enableHeaderSorting(table);
+}
+
+function renderExpenses(rows) {
+  const table = document.getElementById('expenses-table');
+  const tbody = table.tBodies[0];
+  tbody.innerHTML = "";
+  // Expect header: Sr No | Purpose | Amount
+  rows.slice(1).forEach(r => {
+    if (!r.length) return;
+    const tr = document.createElement('tr');
+    const sr = r[0] || "";
+    const pu = r[1] || "";
+    const am = r[2] || "";
+    [sr,pu,am].forEach(v => {
+      const td = document.createElement('td'); td.textContent = v; tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  enableHeaderSorting(table);
+}
+
+function renderContributions(rows) {
+  const table = document.getElementById('contrib-table');
+  const thead = table.createTHead();
+  const tbody = table.tBodies[0];
+  tbody.innerHTML = "";
+  thead.innerHTML = "";
+
+  const header = rows[0]; // Sr No | Name | Months...
+  const trh = document.createElement('tr');
+  header.forEach((h, i) => {
+    const th = document.createElement('th');
+    th.textContent = h || (i===0 ? "Sr No" : i===1 ? "Name" : "");
+    th.dataset.sort = i <= 1 ? (i===0 ? "num" : "text") : "num"; // months numeric
+    trh.appendChild(th);
+  });
+  thead.appendChild(trh);
+
+  rows.slice(1).forEach(r => {
+    if (!r.length) return;
+    const tr = document.createElement('tr');
+    header.forEach((_, i) => {
+      const td = document.createElement('td');
+      td.textContent = r[i] ?? ""; // keep as-is from sheet
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+
+  enableHeaderSorting(table);
+}
+
+/* ===== BOOT ===== */
+(async function init() {
+  try {
+    const [finesRows, expenseRows, contribRows] = await Promise.all([
+      loadCSV(GIDS.fines),
+      loadCSV(GIDS.expenses),
+      loadCSV(GIDS.contributions)
+    ]);
+    renderFines(finesRows);
+    renderExpenses(expenseRows);
+    renderContributions(contribRows);
+
+    attachSearch(document.getElementById('fines-search'), document.getElementById('fines-table'));
+    attachSearch(document.getElementById('expenses-search'), document.getElementById('expenses-table'));
+    attachSearch(document.getElementById('contrib-search'), document.getElementById('contrib-table'));
+  } catch (e) {
+    console.error(e);
+    // Show simple error states
+    const setErr = (id, cols) => {
+      const tb = document.querySelector(`#${id} tbody`);
+      if (tb) tb.innerHTML = `<tr><td colspan="${cols}" class="loading">Could not load data. Check share settings & GIDs.</td></tr>`;
+    };
+    setErr('fines-table', 4);
+    setErr('expenses-table', 3);
+    setErr('contrib-table', 3);
+  }
+})();
+</script>
 
 </body>
 </html>
