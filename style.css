@@ -1,138 +1,135 @@
-/* Reset some default margins and paddings */
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
+/* Body */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f9;
+    background: #f4f6f8;
     color: #333;
+    line-height: 1.6;
 }
 
 /* Header */
 header {
-    background: #222;
-    color: #fff;
+    background: #1a237e;
+    color: white;
     padding: 10px 20px;
-}
-
-header .container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 
 header .logo {
-    display: flex;
-    align-items: center;
+    height: 60px;      /* Adjust logo size */
+    width: auto;
+    margin-right: 15px;
+    vertical-align: middle;
 }
 
-header .logo img {
-    height: 50px;
-    margin-right: 10px;
-}
-
-header .logo h1 {
+header h1 {
     font-size: 24px;
-    font-weight: bold;
-    color: #fff;
+    margin: 0;
 }
 
 nav ul {
     list-style: none;
     display: flex;
+    gap: 15px;
 }
 
 nav ul li {
-    margin: 0 15px;
+    display: inline;
 }
 
 nav ul li a {
-    color: #fff;
+    color: white;
     text-decoration: none;
     font-weight: bold;
 }
 
 nav ul li a:hover {
-    color: #f4b400;
+    text-decoration: underline;
 }
 
 /* Hero Section */
 .hero {
-    background: #444;
-    color: #fff;
-    padding: 80px 20px;
     text-align: center;
+    padding: 40px 20px;
+    background: #3949ab;
+    color: white;
 }
 
 .hero h2 {
-    font-size: 36px;
-    margin-bottom: 15px;
+    font-size: 28px;
+    margin-bottom: 10px;
 }
 
 .hero p {
     font-size: 18px;
 }
 
-/* Sections */
-section {
-    padding: 50px 20px;
+/* Members Section */
+.members {
+    padding: 40px 20px;
     text-align: center;
 }
 
-section h2 {
+.members h2 {
     margin-bottom: 20px;
-    font-size: 28px;
-    color: #222;
+    font-size: 26px;
+    color: #1a237e;
 }
 
-/* Partner Grid */
-.partner-grid {
+/* Members Grid */
+.member-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 20px;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
-.partner {
-    background: #fff;
+/* Member Card */
+.member {
+    background: white;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.partner:hover {
+.member:hover {
     transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.partner img {
+.member img {
     width: 100%;
     height: 180px;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 50%;
     margin-bottom: 10px;
 }
 
-.partner h3 {
-    margin-bottom: 5px;
+.member h3 {
     font-size: 18px;
-    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
 }
 
-.partner p {
+.member p {
     font-size: 14px;
     color: #555;
 }
 
 /* Footer */
 footer {
-    background: #222;
-    color: #fff;
     text-align: center;
-    padding: 15px 20px;
-    margin-top: 20px;
+    background: #1a237e;
+    color: white;
+    padding: 15px;
+    margin-top: 30px;
 }
