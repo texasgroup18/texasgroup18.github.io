@@ -174,7 +174,13 @@ body {
         font-size: 1rem;
     }
 
+    /* ✅ Keep members 2 per row on mobile */
     .members-container {
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .member-card img {
+        max-width: 140px;
     }
 }
