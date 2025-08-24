@@ -1,135 +1,129 @@
 /* General Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Body */
 body {
-    background: #f4f6f8;
-    color: #333;
-    line-height: 1.6;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background: #f9f9f9;
+  color: #333;
 }
 
 /* Header */
 header {
-    background: #1a237e;
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  background: #222;
+  color: #fff;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-header .logo {
-    height: 60px;      /* Adjust logo size */
-    width: auto;
-    margin-right: 15px;
-    vertical-align: middle;
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 50px;   /* 👈 Small logo */
+  width: auto;
+  margin-right: 10px;
+  border-radius: 8px;
 }
 
 header h1 {
-    font-size: 24px;
-    margin: 0;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 nav ul {
-    list-style: none;
-    display: flex;
-    gap: 15px;
-}
-
-nav ul li {
-    display: inline;
+  list-style: none;
+  display: flex;
+  gap: 20px;
 }
 
 nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 nav ul li a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-/* Hero Section */
+/* Hero */
 .hero {
-    text-align: center;
-    padding: 40px 20px;
-    background: #3949ab;
-    color: white;
+  background: url("images/hero.jpg") center/cover no-repeat;
+  color: #fff;
+  text-align: center;
+  padding: 80px 20px;
 }
 
 .hero h2 {
-    font-size: 28px;
-    margin-bottom: 10px;
+  font-size: 36px;
+  margin-bottom: 10px;
 }
 
 .hero p {
-    font-size: 18px;
+  font-size: 20px;
 }
 
-/* Members Section */
+/* Members */
 .members {
-    padding: 40px 20px;
-    text-align: center;
+  padding: 50px 20px;
+  text-align: center;
 }
 
 .members h2 {
-    margin-bottom: 20px;
-    font-size: 26px;
-    color: #1a237e;
+  font-size: 30px;
+  margin-bottom: 30px;
 }
 
-/* Members Grid */
 .member-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+  display: grid;   /* 👈 Forces GRID layout */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
 }
 
-/* Member Card */
 .member {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out;
 }
 
 .member:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
 }
 
 .member img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-bottom: 10px;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
 }
 
 .member h3 {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 5px;
+  font-size: 20px;
+  margin-bottom: 5px;
 }
 
 .member p {
-    font-size: 14px;
-    color: #555;
+  font-size: 16px;
+  color: #555;
 }
 
 /* Footer */
 footer {
-    text-align: center;
-    background: #1a237e;
-    color: white;
-    padding: 15px;
-    margin-top: 30px;
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
 }
