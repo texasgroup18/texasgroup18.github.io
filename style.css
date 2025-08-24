@@ -1,3 +1,16 @@
+/* Logo */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px;
+  background: #004080;
+}
+
+.logo img {
+  height: 60px;
+  width: auto;
+}
 /* Reset and base styles */
 * {
   margin: 0;
