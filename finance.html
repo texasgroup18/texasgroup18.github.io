@@ -1,229 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finance - Texas Group</title>
-<link rel="stylesheet" href="style.css"/>
-<style>
-  table { border-collapse: collapse; width: 95%; max-width: 1200px; margin: 30px auto; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-  th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-  th { background-color: #e0e0e0; }
-  tr:hover { background-color: #f1f1f1; cursor: pointer; }
-  tfoot { font-weight: bold; background-color: #f0f0f0; }
-  .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background: rgba(0,0,0,0.6); }
-  .modal-content { background: #fff; margin: 10% auto; padding: 20px; border-radius: 8px; width: 90%; max-width: 400px; text-align: center; }
-  .close { float: right; font-size: 20px; cursor: pointer; }
-  .positive { color: green; font-weight: bold; }
-  .negative { color: red; font-weight: bold; }
-  @media(max-width: 800px) {
-    table { width: 100%; }
-    th, td { font-size: 12px; padding: 4px; }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Texas Group - Finance</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<!-- Header -->
-<header>
-  <div class="header-left">
-    <img src="images/logo.JPG" alt="Texas Group Logo" class="logo" />
-    <h1>Texas Group</h1>
-  </div>
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="finance.html" style="text-decoration: underline;">Finance</a></li>
-    </ul>
-  </nav>
-</header>
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <img src="images/logo.JPG" alt="Texas Group Logo" class="logo" />
+      <h1>Texas Group</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="finance.html" class="active">Finance</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<section class="hero">
-  <h2>Finance Details</h2>
-  <p>Together We Can</p>
-</section>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Finance Records</h2>
+    <p>Track fines, expenses, and contributions</p>
+  </section>
 
-<!-- Finance Table -->
-<table id="finance-table">
-  <thead>
-    <tr id="month-header">
-      <th>Partner</th>
-      <!-- Months added dynamically -->
-    </tr>
-  </thead>
-  <tbody></tbody>
-  <tfoot>
-    <tr id="totals-row">
-      <th>Total</th>
-      <!-- Totals added dynamically -->
-    </tr>
-  </tfoot>
-</table>
+  <!-- Finance Tables -->
+  <section class="finance">
+    <h2>Fine Records</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Sr No</th>
+          <th>Name</th>
+          <th>Month</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td><td>Darpan Shinde</td><td>Jan 2025</td><td>500</td>
+        </tr>
+        <tr>
+          <td>2</td><td>Vinay Jadhav</td><td>Feb 2025</td><td>200</td>
+        </tr>
+      </tbody>
+    </table>
 
-<!-- Modal for Partner Details -->
-<div id="partner-modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h3 id="modal-name"></h3>
-    <p>Total Contribution: <span id="modal-contribution"></span></p>
-    <p>Total Fines Paid: <span id="modal-fines"></span></p>
-    <p>Share of Expenses: <span id="modal-expenses"></span></p>
-    <p>Net Balance: <span id="modal-balance"></span></p>
-  </div>
-</div>
+    <h2>Expense Records</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Sr No</th>
+          <th>Purpose</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td><td>Picnic</td><td>3000</td>
+        </tr>
+        <tr>
+          <td>2</td><td>Snacks</td><td>1500</td>
+        </tr>
+      </tbody>
+    </table>
 
-<!-- Footer -->
-<footer>
-  <p>📧 Email: texasgroup18@gmail.com | 📞 Contact: 8856967466</p>
-  <p>&copy; 2025 Texas Group. All Rights Reserved.</p>
-</footer>
+    <h2>Contribution Records</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Sr No</th>
+          <th>Name</th>
+          <th>Sept 2024</th>
+          <th>Oct 2024</th>
+          <th>Nov 2024</th>
+          <th>Dec 2024</th>
+          <th>Jan 2025</th>
+          <th>Feb 2025</th>
+          <th>Mar 2025</th>
+          <th>Apr 2025</th>
+          <th>May 2025</th>
+          <th>Jun 2025</th>
+          <th>Jul 2025</th>
+          <th>Aug 2025</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td><td>Darpan Shinde</td>
+          <td>1000</td><td>1000</td><td>1000</td><td>1000</td>
+          <td>1000</td><td>1000</td><td>1000</td><td>1000</td>
+          <td>1000</td><td>1000</td><td>1000</td><td>1000</td>
+        </tr>
+        <tr>
+          <td>2</td><td>Vinay Jadhav</td>
+          <td>1000</td><td>1000</td><td>1000</td><td>1000</td>
+          <td>1000</td><td>1000</td><td>1000</td><td>1000</td>
+          <td>1000</td><td>1000</td><td>1000</td><td>1000</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 
-<script>
-// Google Sheet IDs and GIDs
-const sheetID = "1BQDgQ6el4w5jVk9ZicxxadQYhNI6RfEvYWDc0WKUkKw";
-const contributionGID = "715722052"; // Contribution tab
-const finesGID = "0";  // replace with fines tab GID
-const expenseGID = "123456789"; // replace with expense tab GID
-const numPartners = 18;
-
-// CSV URLs
-const contributionUrl = `https://docs.google.com/spreadsheets/d/${sheetID}/export?format=csv&gid=${contributionGID}`;
-const finesUrl = `https://docs.google.com/spreadsheets/d/${sheetID}/export?format=csv&gid=${finesGID}`;
-const expenseUrl = `https://docs.google.com/spreadsheets/d/${sheetID}/export?format=csv&gid=${expenseGID}`;
-
-let contributions = {};
-let fines = {};
-let expenses = 0;
-let months = [];
-
-// Fetch all data
-Promise.all([
-  fetch(contributionUrl).then(r => r.text()),
-  fetch(finesUrl).then(r => r.text()),
-  fetch(expenseUrl).then(r => r.text())
-]).then(([contributionData, finesData, expenseData]) => {
-
-  // Parse contributions
-  const rows = contributionData.split("\n").slice(1);
-  rows.forEach(row => {
-    if(!row.trim()) return;
-    const cols = row.split(",").map(c => c.replace(/"/g,'').trim());
-    const name = cols[1];
-    if(!months.length) months = cols.slice(2); // capture month headers
-    contributions[name] = cols.slice(2).map(v => parseFloat(v) || 0);
-  });
-
-  // Parse fines
-  const fineRows = finesData.split("\n").slice(1);
-  fineRows.forEach(row => {
-    if(!row.trim()) return;
-    const cols = row.split(",").map(c => c.replace(/"/g,'').trim());
-    const name = cols[1];
-    const month = cols[2];
-    const amount = parseFloat(cols[3]) || 0;
-    if(!fines[name]) fines[name] = {};
-    fines[name][month] = amount;
-  });
-
-  // Parse expenses
-  const expenseRows = expenseData.split("\n").slice(1);
-  expenseRows.forEach(row => {
-    if(!row.trim()) return;
-    const cols = row.split(",").map(c => c.replace(/"/g,'').trim());
-    expenses += parseFloat(cols[2]) || 0;
-  });
-
-  // Calculate expense share per partner
-  const expenseShare = expenses / numPartners;
-
-  // Build table header
-  const headerRow = document.getElementById("month-header");
-  months.forEach(m => {
-    const th = document.createElement("th");
-    th.textContent = m;
-    headerRow.appendChild(th);
-  });
-  const balanceTH = document.createElement("th");
-  balanceTH.textContent = "Balance";
-  headerRow.appendChild(balanceTH);
-
-  // Build table body
-  const tbody = document.querySelector("#finance-table tbody");
-  for(const [name, contribArr] of Object.entries(contributions)){
-    const tr = document.createElement("tr");
-    const tdName = document.createElement("td");
-    tdName.textContent = name;
-    tdName.style.fontWeight = "bold";
-    tdName.style.cursor = "pointer";
-
-    tdName.addEventListener("click", ()=>{
-      const totalContribution = contribArr.reduce((a,b)=>a+b,0);
-      const totalFines = months.reduce((sum,m,i)=>sum+(fines[name] && fines[name][m]?fines[name][m]:0),0);
-      const netBalance = totalContribution - totalFines - expenseShare;
-      document.getElementById("modal-name").textContent = name;
-      document.getElementById("modal-contribution").textContent = totalContribution.toFixed(2);
-      document.getElementById("modal-fines").textContent = totalFines.toFixed(2);
-      document.getElementById("modal-expenses").textContent = expenseShare.toFixed(2);
-      document.getElementById("modal-balance").textContent = netBalance.toFixed(2);
-      document.getElementById("partner-modal").style.display = "block";
-    });
-
-    tr.appendChild(tdName);
-
-    let balance = 0;
-    contribArr.forEach((amt,i)=>{
-      const month = months[i];
-      const fine = fines[name] && fines[name][month] ? fines[name][month] : 0;
-      const net = amt - fine - expenseShare;
-      balance += net;
-      const td = document.createElement("td");
-      td.textContent = net.toFixed(2);
-      td.className = net>=0?'positive':'negative';
-      tr.appendChild(td);
-    });
-
-    const tdBalance = document.createElement("td");
-    tdBalance.textContent = balance.toFixed(2);
-    tdBalance.className = balance>=0?'positive':'negative';
-    tr.appendChild(tdBalance);
-
-    tbody.appendChild(tr);
-  }
-
-  // Build totals row
-  const tfootRow = document.getElementById("totals-row");
-  months.forEach((m,i)=>{
-    let totalMonth = 0;
-    for(const [name, contribArr] of Object.entries(contributions)){
-      const fine = fines[name] && fines[name][m]? fines[name][m] : 0;
-      totalMonth += contribArr[i] - fine - expenseShare;
-    }
-    const th = document.createElement("th");
-    th.textContent = totalMonth.toFixed(2);
-    tfootRow.appendChild(th);
-  });
-
-  const totalBalance = Object.keys(contributions).reduce((sum,name)=>{
-    const contribArr = contributions[name];
-    const balance = contribArr.reduce((b,i)=>b+i,0);
-    return sum + balance;
-  },0) - expenses;
-  const th = document.createElement("th");
-  th.textContent = totalBalance.toFixed(2);
-  tfootRow.appendChild(th);
-
-}).catch(err=>console.error(err));
-
-// Modal close
-document.querySelector(".close").addEventListener("click",()=>{
-  document.getElementById("partner-modal").style.display = "none";
-});
-window.addEventListener("click", (e)=>{
-  if(e.target.id==="partner-modal") document.getElementById("partner-modal").style.display = "none";
-});
-</script>
+  <!-- Footer -->
+  <footer>
+    <p>📧 Email: texasgroup18@gmail.com | 📞 Contact: 8856967466</p>
+    <p>&copy; 2025 Texas Group. All Rights Reserved.</p>
+  </footer>
 
 </body>
 </html>
