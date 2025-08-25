@@ -1,181 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Finance</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Finance - Texas Group</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    .back-btn {
-      background: #0077cc;
+    /* Small page-specific tweaks (keeps same look as index) */
+    .hero { text-align: center; padding: 36px 16px; background: #f5f7fb; }
+    .hero h2 { margin: 0; font-size: 28px; }
+    .hero p { margin: 6px 0 0; color: #666; }
+
+    .container { max-width: 1200px; margin: 20px auto; padding: 0 16px; }
+
+    .cards { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-bottom: 18px; }
+    .card { background: #fff; padding: 14px 18px; border-radius: 10px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); min-width: 210px; text-align: center; }
+    .card h3 { margin: 0; color: #1976d2; font-size: 14px; font-weight: 600; }
+    .card p { margin: 8px 0 0; font-size: 18px; font-weight: 700; }
+
+    .section-title { text-align: center; margin: 24px 0 8px; color: #333; font-size: 18px; }
+
+    iframe.sheet { width: 100%; height: 420px; border: 1px solid #e6e6e6; border-radius: 8px; background: #fff; }
+
+    footer { text-align: center; padding: 18px 0; background: #f8f8f8; color: #333; margin-top: 36px; }
+
+    /* PASSWORD MODAL */
+    #pwModal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.45);
+      z-index: 9999;
+    }
+    #pwModal .card {
+      width: 360px;
+      max-width: 92%;
+      text-align: center;
+    }
+    #pwModal input[type="password"] {
+      width: calc(100% - 24px);
+      padding: 10px;
+      margin-top: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    #pwModal button {
+      margin-top: 12px;
+      padding: 10px 18px;
+      background: #1976d2;
       color: white;
-      padding: 8px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s ease;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
     }
-    .back-btn:hover {
-      background: #005fa3;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 40px;
-      background: #f8f9fa;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    header h1 {
-      margin: 0;
-    }
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .logo {
-      height: 40px;
-      border-radius: 50%;
+    #pwModal .denied { color: #d32f2f; margin-top: 8px; display: none; font-weight: 600; }
+
+    /* hide content before unlock (just in case) */
+    .locked { visibility: hidden; }
+
+    @media(max-width: 720px){
+      .cards{flex-direction:column;align-items:center;}
+      iframe.sheet{height:320px;}
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Header (same structure as index.html) -->
   <header>
     <div class="header-left">
       <img src="images/logo.JPG" alt="Texas Group Logo" class="logo" />
-      <h1>Finance</h1>
+      <h1>Texas Group</h1>
     </div>
-    <div class="header-right">
-      <a href="index.html" class="back-btn">Back to Home</a>
-    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="finance.html" style="text-decoration: underline;">Finance</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero">
-    <div class="hero-content">
-      <h2>Group Finance Overview</h2>
-      <p>Track contributions, expenses, fines and remaining balance</p>
-    </div>
+    <h2>Finance Details</h2>
+    <p>Together We Can</p>
   </section>
 
-  <!-- Password Section -->
-  <section id="password-section" class="section">
+  <!-- Password modal (blocks view until correct password) -->
+  <div id="pwModal" aria-hidden="false" role="dialog">
+    <div class="card">
+      <h3 style="margin-bottom:6px">Access Restricted</h3>
+      <div style="color:#555">Enter password to view finance data</div>
+      <input id="pwInput" type="password" placeholder="Enter password" />
+      <div>
+        <button id="pwSubmit" onclick="attemptUnlock()">Unlock</button>
+      </div>
+      <div class="denied" id="pwDenied">Access Denied ❌ — wrong password</div>
+      <p style="margin-top:10px;color:#777;font-size:13px">Contact admin for access</p>
+    </div>
+  </div>
+
+  <!-- Main finance content (locked until password correct) -->
+  <main id="mainContent" class="locked" aria-hidden="true">
     <div class="container">
-      <h2>Enter Password to View Finance Data</h2>
-      <input type="password" id="passwordInput" placeholder="Enter Password"/>
-      <button onclick="checkPassword()">Submit</button>
-      <p id="error-message" style="color:red; display:none;">Incorrect password!</p>
-    </div>
-  </section>
 
-  <!-- Finance Section -->
-  <main id="finance-content" style="display:none;">
-    <section class="section">
-      <div class="container">
-        <h2>Finance Overview</h2>
-        <div class="cards">
-          <div class="card">
-            <h3>Total Contributions</h3>
-            <p id="total-contribution">Loading...</p>
-          </div>
-          <div class="card">
-            <h3>Total Fines</h3>
-            <p id="total-fines">Loading...</p>
-          </div>
-          <div class="card">
-            <h3>Total Expenses</h3>
-            <p id="total-expenses">Loading...</p>
-          </div>
-          <div class="card">
-            <h3>Remaining Balance</h3>
-            <p id="remaining-amount">Loading...</p>
-          </div>
+      <!-- Summary cards -->
+      <div class="cards" aria-live="polite">
+        <div class="card">
+          <h3>Total Collected</h3>
+          <p id="totalCollected">—</p>
+        </div>
+        <div class="card">
+          <h3>Total Fines</h3>
+          <p id="totalFines">—</p>
+        </div>
+        <div class="card">
+          <h3>Total Expenses</h3>
+          <p id="totalExpenses">—</p>
+        </div>
+        <div class="card">
+          <h3>Remaining Balance</h3>
+          <p id="remainingAmount">—</p>
         </div>
       </div>
-    </section>
 
-    <section class="section">
-      <div class="container">
-        <h2>Contributions</h2>
-        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pubhtml?gid=2096610384&single=true" width="100%" height="400"></iframe>
-      </div>
-    </section>
+      <!-- Sections -->
+      <div class="section-title">Contributions</div>
+      <!-- data-src used so iframe does NOT load until unlock -->
+      <iframe class="sheet" id="contribFrame"
+        data-src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pubhtml?gid=2096610384&single=true"
+        title="Contributions sheet (published)">
+      </iframe>
 
-    <section class="section">
-      <div class="container">
-        <h2>Fines</h2>
-        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pubhtml?gid=0&single=true" width="100%" height="200"></iframe>
-      </div>
-    </section>
+      <div class="section-title">Expenses</div>
+      <iframe class="sheet" id="expenseFrame"
+        data-src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pubhtml?gid=715722052&single=true"
+        title="Expenses sheet (published)">
+      </iframe>
 
-    <section class="section">
-      <div class="container">
-        <h2>Expenses</h2>
-        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pubhtml?gid=715722052&single=true" width="100%" height="400"></iframe>
+      <div class="section-title">Fines</div>
+      <iframe class="sheet" id="finesFrame"
+        data-src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pubhtml?gid=0&single=true"
+        title="Fines sheet (published)">
+      </iframe>
+
+      <div style="text-align:center; margin: 18px 0;">
+        <a href="index.html" style="display:inline-block;padding:10px 16px;background:#1976d2;color:white;border-radius:8px;text-decoration:none;">⬅ Back to Home</a>
       </div>
-    </section>
+
+    </div>
   </main>
 
-  <!-- Footer -->
+  <!-- Footer same as index -->
   <footer>
     <p>📧 Email: texasgroup18@gmail.com | 📞 Contact: 8856967466</p>
     <p>&copy; 2025 Texas Group. All Rights Reserved.</p>
   </footer>
 
   <script>
+    // PUBLIC CSV endpoints (published CSV exports - live)
+    const CSV = {
+      contributions: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pub?gid=2096610384&single=true&output=csv",
+      expenses:      "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pub?gid=715722052&single=true&output=csv",
+      fines:         "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pub?gid=0&single=true&output=csv"
+    };
+
     const PASSWORD = "Texas18";
 
-    function checkPassword() {
-      const input = document.getElementById("passwordInput").value;
-      if (input === PASSWORD) {
-        document.getElementById("password-section").style.display = "none";
-        document.getElementById("finance-content").style.display = "block";
-      } else {
-        document.getElementById("error-message").style.display = "block";
+    // Robust CSV parser (handles quoted fields)
+    function parseCSV(text) {
+      const rows = [];
+      let row = [], field = "", inQuotes = false;
+      for (let i=0; i<text.length; i++) {
+        const ch = text[i], nxt = text[i+1];
+        if (ch === '"') {
+          if (inQuotes && nxt === '"') { field += '"'; i++; }
+          else { inQuotes = !inQuotes; }
+        } else if (ch === ',' && !inQuotes) {
+          row.push(field); field = "";
+        } else if ((ch === '\n' || ch === '\r') && !inQuotes) {
+          if (field !== "" || row.length) { row.push(field); rows.push(row); row = []; field = ""; }
+          // skip extra \r\n combos
+        } else {
+          field += ch;
+        }
       }
+      if (field !== "" || row.length) row.push(field), rows.push(row);
+      return rows.filter(r => r.length); // drop empty rows
     }
 
-    // Totals Calculation
-    async function fetchTotals() {
+    function parseNumberLoose(v) {
+      if (v == null) return 0;
+      if (typeof v === "number") return v;
+      // remove non numeric except . and -
+      const n = String(v).replace(/[^0-9.-]+/g,"");
+      return n === "" ? 0 : Number(n);
+    }
+
+    // sums only the monthly contribution columns (detect header)
+    function sumContributions(rows) {
+      if (!rows || rows.length < 2) return 0;
+      const header = rows[0].map(h => (h||"").trim());
+      // find index of "Name" or fallback to 1
+      let nameIdx = header.findIndex(h => /name/i.test(h));
+      if (nameIdx === -1) nameIdx = 1;
+      const monthStart = nameIdx + 1;
+      let total = 0;
+      for (let r = 1; r < rows.length; r++) {
+        for (let c = monthStart; c < rows[r].length; c++) {
+          total += parseNumberLoose(rows[r][c]);
+        }
+      }
+      return total;
+    }
+
+    // sums a column by header label 'Amount' (case-insensitive) or fallback to last column
+    function sumAmountColumn(rows) {
+      if (!rows || rows.length < 2) return 0;
+      const header = rows[0].map(h => (h||"").trim());
+      let amountIdx = header.findIndex(h => /^amount$/i.test(h));
+      if (amountIdx === -1) {
+        // fallback: last column index
+        amountIdx = header.length - 1;
+      }
+      let total = 0;
+      for (let r = 1; r < rows.length; r++) {
+        total += parseNumberLoose(rows[r][amountIdx]);
+      }
+      return total;
+    }
+
+    async function fetchCSVandParse(url) {
+      const res = await fetch(url, {cache: "no-store"}); // no-store to get live updates
+      const txt = await res.text();
+      return parseCSV(txt);
+    }
+
+    async function computeAndRenderTotals() {
       try {
-        let contributionRes = await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pub?gid=2096610384&single=true&output=csv");
-        let expenseRes = await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pub?gid=715722052&single=true&output=csv");
-        let finesRes = await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pub?gid=0&single=true&output=csv");
+        const [contribRows, expenseRows, fineRows] = await Promise.all([
+          fetchCSVandParse(CSV.contributions),
+          fetchCSVandParse(CSV.expenses),
+          fetchCSVandParse(CSV.fines)
+        ]);
 
-        let contributionText = await contributionRes.text();
-        let expenseText = await expenseRes.text();
-        let finesText = await finesRes.text();
+        const totalContrib = sumContributions(contribRows);
+        const totalExpenses = sumAmountColumn(expenseRows);
+        const totalFines = sumAmountColumn(fineRows);
+        const remaining = totalContrib + totalFines - totalExpenses;
 
-        let contributionTotal = sumCSV(contributionText);
-        let expenseTotal = sumCSV(expenseText);
-        let finesTotal = sumCSV(finesText);
+        const fmt = n => "₹ " + Math.round(n).toLocaleString("en-IN");
 
-        let remaining = (contributionTotal + finesTotal) - expenseTotal;
-
-        document.getElementById("total-contribution").innerText = "₹" + contributionTotal.toLocaleString();
-        document.getElementById("total-expenses").innerText = "₹" + expenseTotal.toLocaleString();
-        document.getElementById("total-fines").innerText = "₹" + finesTotal.toLocaleString();
-        document.getElementById("remaining-amount").innerText = "₹" + remaining.toLocaleString();
-      } catch (e) {
-        console.error("Error fetching totals", e);
+        document.getElementById("totalCollected").textContent = fmt(totalContrib);
+        document.getElementById("totalExpenses").textContent  = fmt(totalExpenses);
+        document.getElementById("totalFines").textContent     = fmt(totalFines);
+        document.getElementById("remainingAmount").textContent = fmt(remaining);
+      } catch (err) {
+        console.error("Totals fetch failed:", err);
+        document.getElementById("totalCollected").textContent = "—";
+        document.getElementById("totalExpenses").textContent  = "—";
+        document.getElementById("totalFines").textContent     = "—";
+        document.getElementById("remainingAmount").textContent = "—";
       }
     }
 
-    function sumCSV(csvText) {
-      let rows = csvText.split("\n").slice(1);
-      let sum = 0;
-      rows.forEach(row => {
-        let cols = row.split(",");
-        let value = parseFloat(cols[cols.length - 1]);
-        if (!isNaN(value)) sum += value;
+    // Unlock flow: set iframe src from data-src and compute totals
+    function unlockUI() {
+      // set iframe src to start loading sheets
+      ["contribFrame","expenseFrame","finesFrame"].forEach(id=>{
+        const el = document.getElementById(id);
+        const src = el.getAttribute("data-src");
+        if (src && !el.src) el.src = src;
       });
-      return sum;
+
+      // reveal main content
+      document.getElementById("mainContent").classList.remove("locked");
+      document.getElementById("mainContent").setAttribute("aria-hidden","false");
+      // hide modal
+      document.getElementById("pwModal").style.display = "none";
+
+      // compute totals (live)
+      computeAndRenderTotals();
     }
 
-    fetchTotals();
+    // Called when user clicks Unlock
+    function attemptUnlock() {
+      const val = document.getElementById("pwInput").value;
+      if (val === PASSWORD) {
+        unlockUI();
+      } else {
+        const denied = document.getElementById("pwDenied");
+        denied.style.display = "block";
+        // small shake or quick feedback (optional)
+      }
+    }
+
+    // Allow pressing Enter in password input
+    document.addEventListener("keydown", function(e){
+      const inputFocused = document.activeElement && document.activeElement.id === "pwInput";
+      if (inputFocused && e.key === "Enter") attemptUnlock();
+    });
   </script>
 </body>
 </html>
