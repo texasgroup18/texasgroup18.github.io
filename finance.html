@@ -6,83 +6,65 @@
   <title>Finance - Texas Group</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    /* Small page-specific tweaks (keeps same look as index) */
-    .hero { text-align: center; padding: 36px 16px; background: #f5f7fb; }
-    .hero h2 { margin: 0; font-size: 28px; }
-    .hero p { margin: 6px 0 0; color: #666; }
-
-    .container { max-width: 1200px; margin: 20px auto; padding: 0 16px; }
-
-    .cards { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-bottom: 18px; }
-    .card { background: #fff; padding: 14px 18px; border-radius: 10px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); min-width: 210px; text-align: center; }
-    .card h3 { margin: 0; color: #1976d2; font-size: 14px; font-weight: 600; }
-    .card p { margin: 8px 0 0; font-size: 18px; font-weight: 700; }
-
-    .section-title { text-align: center; margin: 24px 0 8px; color: #333; font-size: 18px; }
-
-    iframe.sheet { width: 100%; height: 420px; border: 1px solid #e6e6e6; border-radius: 8px; background: #fff; }
-
-    footer { text-align: center; padding: 18px 0; background: #f8f8f8; color: #333; margin-top: 36px; }
-
-    /* PASSWORD MODAL */
-    #pwModal {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.45);
-      z-index: 9999;
-    }
-    #pwModal .card {
-      width: 360px;
-      max-width: 92%;
-      text-align: center;
-    }
-    #pwModal input[type="password"] {
-      width: calc(100% - 24px);
-      padding: 10px;
-      margin-top: 12px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-    #pwModal button {
-      margin-top: 12px;
-      padding: 10px 18px;
-      background: #1976d2;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    #pwModal .denied { color: #d32f2f; margin-top: 8px; display: none; font-weight: 600; }
-
-    /* hide content before unlock (just in case) */
-    .locked { visibility: hidden; }
-
-    @media(max-width: 720px){
-      .cards{flex-direction:column;align-items:center;}
-      iframe.sheet{height:320px;}
+    /* Page-specific tweaks to match your index look */
+    .hero { text-align:center; padding:36px 16px; background:#f5f7fb; }
+    .hero h2{ margin:0; font-size:28px }
+    .hero p{ margin:6px 0 0; color:#666 }
+    .container { max-width:1200px; margin:20px auto; padding:0 16px }
+    .cards { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-bottom:18px }
+    .card { background:#fff; padding:14px 18px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.06); min-width:210px; text-align:center }
+    .card h3{ margin:0; color:#1976d2; font-size:14px; font-weight:600 }
+    .card p{ margin:8px 0 0; font-size:18px; font-weight:700 }
+    .section-title { text-align:center; margin:24px 0 8px; color:#333; font-size:18px }
+    iframe.sheet { width:100%; height:420px; border:1px solid #e6e6e6; border-radius:8px; background:#fff }
+    footer { text-align:center; padding:18px 0; background:#f8f8f8; color:#333; margin-top:36px }
+    /* password modal */
+    #pwModal { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.45); z-index:9999 }
+    #pwCard { width:380px; max-width:92%; padding:20px; background:#fff; border-radius:10px; text-align:center }
+    #pwCard input[type="password"]{ width:calc(100% - 22px); padding:10px; margin-top:12px; border-radius:6px; border:1px solid #ccc }
+    #pwCard button{ margin-top:12px; padding:10px 18px; background:#1976d2; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight:600 }
+    #pwDenied { color:#c62828; margin-top:10px; display:none; font-weight:600 }
+    .locked { visibility:hidden } /* extra protection: keep content hidden until unlock */
+    header { display:flex; align-items:center; justify-content:space-between; padding:12px 24px; background:#fff; box-shadow:0 1px 6px rgba(0,0,0,0.06) }
+    .header-left { display:flex; align-items:center; gap:12px }
+    .logo { height:48px; border-radius:6px }
+    nav ul { list-style:none; padding:0; margin:0; display:flex; gap:12px }
+    nav a { text-decoration:none; color:#333; padding:6px 8px }
+    nav a.active { text-decoration:underline }
+    .right-actions { display:flex; gap:8px; align-items:center }
+    .btn { background:#1976d2; color:#fff; padding:8px 12px; border-radius:8px; text-decoration:none; border:none; cursor:pointer; }
+    .btn.secondary { background:#666 }
+    @media(max-width:720px){
+      .cards{flex-direction:column;align-items:center}
+      iframe.sheet{height:320px}
     }
   </style>
 </head>
 <body>
 
-  <!-- Header (same structure as index.html) -->
+  <!-- Header (same structure as index.html + logout button) -->
   <header>
     <div class="header-left">
       <img src="images/logo.JPG" alt="Texas Group Logo" class="logo" />
-      <h1>Texas Group</h1>
+      <div>
+        <h1 style="margin:0">Texas Group</h1>
+        <div style="font-size:13px;color:#666">Finance</div>
+      </div>
     </div>
+
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="services.html">Services</a></li>
-        <li><a href="finance.html" style="text-decoration: underline;">Finance</a></li>
+        <li><a class="active" href="finance.html">Finance</a></li>
       </ul>
     </nav>
+
+    <div class="right-actions">
+      <a href="index.html" class="btn secondary">Back to Home</a>
+      <button id="logoutBtn" class="btn" style="display:none">Logout</button>
+    </div>
   </header>
 
   <!-- Hero -->
@@ -92,24 +74,24 @@
   </section>
 
   <!-- Password modal (blocks view until correct password) -->
-  <div id="pwModal" aria-hidden="false" role="dialog">
-    <div class="card">
+  <div id="pwModal" role="dialog" aria-modal="true">
+    <div id="pwCard">
       <h3 style="margin-bottom:6px">Access Restricted</h3>
       <div style="color:#555">Enter password to view finance data</div>
-      <input id="pwInput" type="password" placeholder="Enter password" />
+      <input id="pwInput" type="password" placeholder="Enter password" aria-label="Password"/>
       <div>
-        <button id="pwSubmit" onclick="attemptUnlock()">Unlock</button>
+        <button id="pwSubmit">Unlock</button>
       </div>
-      <div class="denied" id="pwDenied">Access Denied ❌ — wrong password</div>
+      <div id="pwDenied">Access Denied ❌ — wrong password</div>
       <p style="margin-top:10px;color:#777;font-size:13px">Contact admin for access</p>
     </div>
   </div>
 
-  <!-- Main finance content (locked until password correct) -->
+  <!-- Main content locked until unlock -->
   <main id="mainContent" class="locked" aria-hidden="true">
     <div class="container">
 
-      <!-- Summary cards -->
+      <!-- summary cards -->
       <div class="cards" aria-live="polite">
         <div class="card">
           <h3>Total Collected</h3>
@@ -129,41 +111,36 @@
         </div>
       </div>
 
-      <!-- Sections -->
+      <!-- sections (iframes use data-src so they don't load until unlock) -->
       <div class="section-title">Contributions</div>
-      <!-- data-src used so iframe does NOT load until unlock -->
-      <iframe class="sheet" id="contribFrame"
+      <iframe id="contribFrame" class="sheet"
         data-src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pubhtml?gid=2096610384&single=true"
-        title="Contributions sheet (published)">
-      </iframe>
+        title="Contributions (published)"></iframe>
 
       <div class="section-title">Expenses</div>
-      <iframe class="sheet" id="expenseFrame"
+      <iframe id="expenseFrame" class="sheet"
         data-src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pubhtml?gid=715722052&single=true"
-        title="Expenses sheet (published)">
-      </iframe>
+        title="Expenses (published)"></iframe>
 
       <div class="section-title">Fines</div>
-      <iframe class="sheet" id="finesFrame"
+      <iframe id="finesFrame" class="sheet"
         data-src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pubhtml?gid=0&single=true"
-        title="Fines sheet (published)">
-      </iframe>
+        title="Fines (published)"></iframe>
 
-      <div style="text-align:center; margin: 18px 0;">
+      <div style="text-align:center; margin:18px 0;">
         <a href="index.html" style="display:inline-block;padding:10px 16px;background:#1976d2;color:white;border-radius:8px;text-decoration:none;">⬅ Back to Home</a>
       </div>
-
     </div>
   </main>
 
-  <!-- Footer same as index -->
+  <!-- footer -->
   <footer>
     <p>📧 Email: texasgroup18@gmail.com | 📞 Contact: 8856967466</p>
     <p>&copy; 2025 Texas Group. All Rights Reserved.</p>
   </footer>
 
   <script>
-    // PUBLIC CSV endpoints (published CSV exports - live)
+    // CSV endpoints (published CSVs for live totals)
     const CSV = {
       contributions: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pub?gid=2096610384&single=true&output=csv",
       expenses:      "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pub?gid=715722052&single=true&output=csv",
@@ -171,12 +148,13 @@
     };
 
     const PASSWORD = "Texas18";
+    const UNLOCK_KEY = "finance_unlocked"; // sessionStorage key
 
-    // Robust CSV parser (handles quoted fields)
+    // CSV parser (handles quoted fields)
     function parseCSV(text) {
       const rows = [];
       let row = [], field = "", inQuotes = false;
-      for (let i=0; i<text.length; i++) {
+      for (let i = 0; i < text.length; i++) {
         const ch = text[i], nxt = text[i+1];
         if (ch === '"') {
           if (inQuotes && nxt === '"') { field += '"'; i++; }
@@ -185,49 +163,66 @@
           row.push(field); field = "";
         } else if ((ch === '\n' || ch === '\r') && !inQuotes) {
           if (field !== "" || row.length) { row.push(field); rows.push(row); row = []; field = ""; }
-          // skip extra \r\n combos
         } else {
           field += ch;
         }
       }
-      if (field !== "" || row.length) row.push(field), rows.push(row);
-      return rows.filter(r => r.length); // drop empty rows
+      if (field !== "" || row.length) { row.push(field); rows.push(row); }
+      return rows.filter(r => r.length);
     }
 
     function parseNumberLoose(v) {
       if (v == null) return 0;
       if (typeof v === "number") return v;
-      // remove non numeric except . and -
-      const n = String(v).replace(/[^0-9.-]+/g,"");
+      const n = String(v).replace(/[^0-9.-]+/g, "");
       return n === "" ? 0 : Number(n);
     }
 
-    // sums only the monthly contribution columns (detect header)
+    // month header detection (accepts Jan, Sept, Sep, Jan25, Jan 2025, Sep-2024, etc.)
+    const monthRegex = /^(jan(uary)?|feb(ruary)?|mar(ch)?|apr(il)?|may|jun(e)?|jul(y)?|aug(ust)?|sep(t(ember)?)?|oct(ober)?|nov(ember)?|dec(ember)?)([\s\-]?\d{2,4})?$/i;
+
+    function findMonthIndices(headerRow) {
+      const idx = [];
+      for (let i = 0; i < headerRow.length; i++) {
+        const h = (headerRow[i] || "").trim();
+        if (monthRegex.test(h)) idx.push(i);
+      }
+      return idx;
+    }
+
+    async function fetchCSV(url) {
+      const res = await fetch(url, { cache: "no-store" });
+      const text = await res.text();
+      return parseCSV(text);
+    }
+
+    // Sum contribution only across detected month columns
     function sumContributions(rows) {
       if (!rows || rows.length < 2) return 0;
-      const header = rows[0].map(h => (h||"").trim());
-      // find index of "Name" or fallback to 1
-      let nameIdx = header.findIndex(h => /name/i.test(h));
-      if (nameIdx === -1) nameIdx = 1;
-      const monthStart = nameIdx + 1;
+      const header = rows[0];
+      let monthIdxs = findMonthIndices(header);
+      // fallback: assume columns after "Name" are months
+      if (monthIdxs.length === 0) {
+        const nameIdx = header.findIndex(h => /name/i.test(h));
+        const start = nameIdx === -1 ? 2 : nameIdx + 1;
+        for (let i = start; i < header.length; i++) monthIdxs.push(i);
+      }
       let total = 0;
       for (let r = 1; r < rows.length; r++) {
-        for (let c = monthStart; c < rows[r].length; c++) {
-          total += parseNumberLoose(rows[r][c]);
+        const row = rows[r];
+        for (const ci of monthIdxs) {
+          total += parseNumberLoose(row[ci]);
         }
       }
       return total;
     }
 
-    // sums a column by header label 'Amount' (case-insensitive) or fallback to last column
+    // Sum amount column by header label "Amount" or fallback to last column
     function sumAmountColumn(rows) {
       if (!rows || rows.length < 2) return 0;
-      const header = rows[0].map(h => (h||"").trim());
-      let amountIdx = header.findIndex(h => /^amount$/i.test(h));
-      if (amountIdx === -1) {
-        // fallback: last column index
-        amountIdx = header.length - 1;
-      }
+      const header = rows[0];
+      let amountIdx = header.findIndex(h => /^\s*amount\s*$/i.test(h));
+      if (amountIdx === -1) amountIdx = header.length - 1;
       let total = 0;
       for (let r = 1; r < rows.length; r++) {
         total += parseNumberLoose(rows[r][amountIdx]);
@@ -235,18 +230,13 @@
       return total;
     }
 
-    async function fetchCSVandParse(url) {
-      const res = await fetch(url, {cache: "no-store"}); // no-store to get live updates
-      const txt = await res.text();
-      return parseCSV(txt);
-    }
-
+    // compute totals after unlock
     async function computeAndRenderTotals() {
       try {
         const [contribRows, expenseRows, fineRows] = await Promise.all([
-          fetchCSVandParse(CSV.contributions),
-          fetchCSVandParse(CSV.expenses),
-          fetchCSVandParse(CSV.fines)
+          fetchCSV(CSV.contributions),
+          fetchCSV(CSV.expenses),
+          fetchCSV(CSV.fines)
         ]);
 
         const totalContrib = sumContributions(contribRows);
@@ -259,51 +249,67 @@
         document.getElementById("totalCollected").textContent = fmt(totalContrib);
         document.getElementById("totalExpenses").textContent  = fmt(totalExpenses);
         document.getElementById("totalFines").textContent     = fmt(totalFines);
-        document.getElementById("remainingAmount").textContent = fmt(remaining);
+        document.getElementById("remainingAmount").textContent= fmt(remaining);
       } catch (err) {
-        console.error("Totals fetch failed:", err);
-        document.getElementById("totalCollected").textContent = "—";
-        document.getElementById("totalExpenses").textContent  = "—";
-        document.getElementById("totalFines").textContent     = "—";
-        document.getElementById("remainingAmount").textContent = "—";
+        console.error("Totals error:", err);
+        ["totalCollected","totalExpenses","totalFines","remainingAmount"].forEach(id=>{
+          document.getElementById(id).textContent = "—";
+        });
       }
     }
 
-    // Unlock flow: set iframe src from data-src and compute totals
+    // reveal UI and start loading sheets / totals
     function unlockUI() {
-      // set iframe src to start loading sheets
+      // set iframe src attributes (so they actually load)
       ["contribFrame","expenseFrame","finesFrame"].forEach(id=>{
         const el = document.getElementById(id);
-        const src = el.getAttribute("data-src");
-        if (src && !el.src) el.src = src;
+        const ds = el.getAttribute("data-src");
+        if (ds && !el.src) el.src = ds;
       });
 
-      // reveal main content
+      // hide modal and show content
+      document.getElementById("pwModal").style.display = "none";
       document.getElementById("mainContent").classList.remove("locked");
       document.getElementById("mainContent").setAttribute("aria-hidden","false");
-      // hide modal
-      document.getElementById("pwModal").style.display = "none";
 
-      // compute totals (live)
+      // show logout
+      document.getElementById("logoutBtn").style.display = "inline-block";
+
+      // compute totals
       computeAndRenderTotals();
     }
 
-    // Called when user clicks Unlock
+    function lockUI() {
+      // clear unlock flag and reload to be safe
+      sessionStorage.removeItem(UNLOCK_KEY);
+      window.location.reload();
+    }
+
+    // Attempt unlock when pressing button or Enter
     function attemptUnlock() {
-      const val = document.getElementById("pwInput").value;
-      if (val === PASSWORD) {
+      const v = document.getElementById("pwInput").value || "";
+      if (v === PASSWORD) {
+        sessionStorage.setItem(UNLOCK_KEY, "1"); // remember for this tab/session (persists across refresh)
         unlockUI();
       } else {
-        const denied = document.getElementById("pwDenied");
-        denied.style.display = "block";
-        // small shake or quick feedback (optional)
+        const d = document.getElementById("pwDenied");
+        d.style.display = "block";
+        setTimeout(()=> d.style.display = "none", 3500);
       }
     }
 
-    // Allow pressing Enter in password input
-    document.addEventListener("keydown", function(e){
-      const inputFocused = document.activeElement && document.activeElement.id === "pwInput";
-      if (inputFocused && e.key === "Enter") attemptUnlock();
+    // Initialize: if previously unlocked this session, auto-unlock
+    document.addEventListener("DOMContentLoaded", function(){
+      document.getElementById("pwSubmit").addEventListener("click", attemptUnlock);
+      document.getElementById("logoutBtn").addEventListener("click", lockUI);
+      document.getElementById("pwInput").addEventListener("keydown", function(e){
+        if (e.key === "Enter") attemptUnlock();
+      });
+
+      if (sessionStorage.getItem(UNLOCK_KEY) === "1") {
+        // auto-unlock without showing modal
+        unlockUI();
+      }
     });
   </script>
 </body>
