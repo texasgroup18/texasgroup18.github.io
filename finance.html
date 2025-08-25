@@ -19,6 +19,32 @@
       text-align: center;
       font-size: 1.5em;
     }
+    .summary {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin: 20px auto;
+      max-width: 95%;
+    }
+    .card {
+      flex: 1;
+      min-width: 200px;
+      margin: 10px;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card h3 {
+      margin: 0;
+      color: #1976d2;
+    }
+    .card p {
+      font-size: 1.5em;
+      margin: 10px 0 0;
+      font-weight: bold;
+    }
     section {
       margin: 20px auto;
       max-width: 95%;
@@ -39,11 +65,85 @@
       overflow: hidden;
     }
   </style>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script>
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawSummary);
+
+    function drawSummary() {
+      // Contributions (only monthly columns)
+      fetchData("2096610384", "contribution", function(contributionTotal) {
+        // Expenses (only Amount column)
+        fetchData("715722052", "expense", function(expenseTotal) {
+          // Fines (only Amount column)
+          fetchData("0", "fine", function(fineTotal) {
+            let remaining = contributionTotal + fineTotal - expenseTotal;
+            document.getElementById("totalContributions").innerText = "₹ " + contributionTotal.toLocaleString();
+            document.getElementById("totalExpenses").innerText = "₹ " + expenseTotal.toLocaleString();
+            document.getElementById("totalFines").innerText = "₹ " + fineTotal.toLocaleString();
+            document.getElementById("remainingAmount").innerText = "₹ " + remaining.toLocaleString();
+          });
+        });
+      });
+    }
+
+    function fetchData(gid, type, callback) {
+      let url = "https://docs.google.com/spreadsheets/d/1BQDgQ6el4w5jVk9ZicxxadQYhNI6RfEvYWDc0WKUkKw/gviz/tq?tqx=out:json&gid=" + gid;
+      fetch(url)
+        .then(res => res.text())
+        .then(data => {
+          let json = JSON.parse(data.substr(47).slice(0, -2));
+          let rows = json.table.rows;
+          let total = 0;
+          rows.forEach((r, rowIndex) => {
+            // Skip header row if present
+            if (rowIndex === 0 && typeof r.c[0].v === "string") return;
+
+            if (type === "contribution") {
+              // Contribution: sum only from column index 2 onward (Sept–Aug)
+              for (let i = 2; i < r.c.length; i++) {
+                let cell = r.c[i];
+                if (cell && !isNaN(cell.v)) {
+                  total += Number(cell.v);
+                }
+              }
+            } else if (type === "expense" || type === "fine") {
+              // Expense/Fine: sum only last column (Amount)
+              let amountCell = r.c[r.c.length - 1];
+              if (amountCell && !isNaN(amountCell.v)) {
+                total += Number(amountCell.v);
+              }
+            }
+          });
+          callback(total);
+        });
+    }
+  </script>
 </head>
 <body>
   <header>
     Finance Tracker
   </header>
+
+  <!-- Summary Cards -->
+  <div class="summary">
+    <div class="card">
+      <h3>Total Collected</h3>
+      <p id="totalContributions">₹ 0</p>
+    </div>
+    <div class="card">
+      <h3>Total Fines</h3>
+      <p id="totalFines">₹ 0</p>
+    </div>
+    <div class="card">
+      <h3>Total Expenses</h3>
+      <p id="totalExpenses">₹ 0</p>
+    </div>
+    <div class="card">
+      <h3>Remaining Balance</h3>
+      <p id="remainingAmount">₹ 0</p>
+    </div>
+  </div>
 
   <section>
     <h2>Fines</h2>
