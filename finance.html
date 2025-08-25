@@ -1,244 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Texas Group – Finance</title>
-  <link rel="stylesheet" href="style.css"/>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Tracker</title>
   <style>
-    /* Page-specific helpers (keeps your index.html look) */
-    .summary {
-      max-width: 1200px;
-      margin: 24px auto;
-      padding: 0 16px;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(180px, 1fr));
-      gap: 14px;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f6f8;
+      color: #333;
+    }
+    header {
+      background: #1976d2;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.8em;
+    }
+    #summary {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px;
     }
     .card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      padding: 16px;
-      text-align: center;
-    }
-    .card h3 {
-      margin: 0;
-      font-size: 1rem;
-      opacity: .8;
-    }
-    .card p {
-      margin: 8px 0 0;
-      font-size: 1.6rem;
-      font-weight: 700;
-    }
-    .finance {
-      max-width: 1200px;
-      margin: 24px auto;
-      padding: 0 16px;
-    }
-    .finance h2 {
-      margin-top: 32px;
-      border-bottom: 2px solid #eee;
-      padding-bottom: 8px;
-    }
-    .sheet-frame {
-      width: 100%;
-      border: none;
-      height: 460px;
+      background: white;
+      padding: 15px 20px;
       border-radius: 10px;
-      background: #fff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      margin: 12px 0 28px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      min-width: 200px;
+      text-align: center;
+      font-size: 1.2em;
     }
-    @media (max-width: 900px) {
-      .summary { grid-template-columns: repeat(2, 1fr); }
-      .sheet-frame { height: 380px; }
+    section {
+      margin: 20px auto;
+      max-width: 95%;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
     }
-    @media (max-width: 520px) {
-      .summary { grid-template-columns: 1fr; }
+    h2 {
+      margin-top: 0;
+      color: #1976d2;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background: #1976d2;
+      color: white;
     }
   </style>
-
-  <!-- Google Charts loader (used only to ensure gviz JSON is available) -->
-  <script src="https://www.gstatic.com/charts/loader.js"></script>
-  <script>
-    // ====== CONFIG (published doc) ======
-    const PUB_BASE =
-      "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/gviz/tq?tqx=out:json&gid=";
-    const GID = {
-      fines: "0",
-      expenses: "715722052",
-      contributions: "2096610384"
-    };
-
-    // ====== Helpers ======
-    function parseGViz(text) {
-      // Robustly extract JSON from gviz wrapper
-      const start = text.indexOf("{");
-      const end = text.lastIndexOf("}");
-      return JSON.parse(text.slice(start, end + 1));
-    }
-    function parseNumberLoose(v) {
-      if (v == null) return 0;
-      if (typeof v === "number") return v;
-      const n = Number(String(v).replace(/[^\d.-]/g, ""));
-      return Number.isFinite(n) ? n : 0;
-    }
-    function sumColumns(data, indices) {
-      let total = 0;
-      const rows = data.table.rows || [];
-      rows.forEach(r => {
-        const cells = r.c || [];
-        indices.forEach(i => {
-          const cell = cells[i];
-          if (!cell) return;
-          // Prefer numeric underlying value; fall back to loose parsing
-          const val = (cell.v !== undefined) ? parseNumberLoose(cell.v) : parseNumberLoose(cell.f);
-          total += val;
-        });
-      });
-      return total;
-    }
-    function findColumnIndicesByLabel(data, regexes) {
-      const cols = data.table.cols || [];
-      const idx = [];
-      cols.forEach((col, i) => {
-        const label = (col && col.label ? col.label : "").trim();
-        if (regexes.some(rx => rx.test(label))) idx.push(i);
-      });
-      return idx;
-    }
-
-    // Build month regexes for Sept 2024 … Aug 2025 (accepts Sep/Sept)
-    function monthRegexes_2024_2025() {
-      const pairs = [
-        ["(Sep|Sept)\\s*2024"], ["Oct\\s*2024"], ["Nov\\s*2024"], ["Dec\\s*2024"],
-        ["Jan\\s*2025"], ["Feb\\s*2025"], ["Mar\\s*2025"], ["Apr\\s*2025"],
-        ["May\\s*2025"], ["Jun\\s*2025"], ["Jul\\s*2025"], ["Aug\\s*2025"]
-      ];
-      return pairs.map(p => new RegExp("^" + p[0] + "$", "i"));
-    }
-
-    async function fetchSheet(gid) {
-      const res = await fetch(PUB_BASE + gid);
-      const txt = await res.text();
-      return parseGViz(txt);
-    }
-
-    async function computeTotals() {
-      try {
-        // Contributions: sum only month columns (Sept 2024 … Aug 2025)
-        const contribData = await fetchSheet(GID.contributions);
-        let monthIdx = findColumnIndicesByLabel(contribData, monthRegexes_2024_2025());
-        if (monthIdx.length === 0) {
-          // Fallback: assume months start at col 3 (index 2) onwards
-          const colCount = (contribData.table.cols || []).length;
-          for (let i = 2; i < colCount; i++) monthIdx.push(i);
-        }
-        const totalContrib = sumColumns(contribData, monthIdx);
-
-        // Expenses: sum only "Amount" column (fallback last column)
-        const expenseData = await fetchSheet(GID.expenses);
-        let expIdx = findColumnIndicesByLabel(expenseData, [/^amount$/i]);
-        if (expIdx.length === 0) expIdx = [(expenseData.table.cols.length - 1)];
-        const totalExpenses = sumColumns(expenseData, expIdx);
-
-        // Fines: sum only "Amount" column (fallback last column)
-        const finesData = await fetchSheet(GID.fines);
-        let fineIdx = findColumnIndicesByLabel(finesData, [/^amount$/i]);
-        if (fineIdx.length === 0) fineIdx = [(finesData.table.cols.length - 1)];
-        const totalFines = sumColumns(finesData, fineIdx);
-
-        const remaining = totalContrib + totalFines - totalExpenses;
-
-        // Render with Indian formatting
-        const fmt = n => "₹ " + Math.round(n).toLocaleString("en-IN");
-        document.getElementById("totalContributions").textContent = fmt(totalContrib);
-        document.getElementById("totalFines").textContent         = fmt(totalFines);
-        document.getElementById("totalExpenses").textContent      = fmt(totalExpenses);
-        document.getElementById("remainingAmount").textContent    = fmt(remaining);
-      } catch (e) {
-        console.error("Totals error:", e);
-        // Show a soft error message in cards if something fails
-        const warn = "—";
-        ["totalContributions","totalFines","totalExpenses","remainingAmount"]
-          .forEach(id => document.getElementById(id).textContent = warn);
-      }
-    }
-
-    // Boot once page is ready
-    document.addEventListener("DOMContentLoaded", computeTotals);
-  </script>
 </head>
 <body>
-
-  <!-- Header (same as index.html) -->
   <header>
-    <div class="header-left">
-      <img src="images/logo.JPG" alt="Texas Group Logo" class="logo" />
-      <h1>Texas Group</h1>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="finance.html" class="active">Finance</a></li>
-      </ul>
-    </nav>
+    Finance Tracker
   </header>
 
-  <!-- Hero (same style as your site) -->
-  <section class="hero">
-    <h2>Finance Records</h2>
-    <p>Together We Can</p>
-  </section>
+  <div id="summary">
+    <div class="card">💰 Total Contributions: <span id="totalContrib">-</span></div>
+    <div class="card">⚠️ Total Fines: <span id="totalFines">-</span></div>
+    <div class="card">📉 Total Expenses: <span id="totalExpenses">-</span></div>
+    <div class="card">✅ Remaining Balance: <span id="remaining">-</span></div>
+  </div>
 
-  <!-- Top Summary Cards -->
-  <section class="summary">
-    <div class="card">
-      <h3>Total Collected</h3>
-      <p id="totalContributions">₹ 0</p>
-    </div>
-    <div class="card">
-      <h3>Total Fines</h3>
-      <p id="totalFines">₹ 0</p>
-    </div>
-    <div class="card">
-      <h3>Total Expenses</h3>
-      <p id="totalExpenses">₹ 0</p>
-    </div>
-    <div class="card">
-      <h3>Remaining Balance</h3>
-      <p id="remainingAmount">₹ 0</p>
-    </div>
-  </section>
-
-  <!-- Embedded live sheets (your published links) -->
-  <section class="finance">
+  <section>
     <h2>Fines</h2>
-    <iframe class="sheet-frame"
-      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pubhtml?gid=0&single=true">
-    </iframe>
-
-    <h2>Expenses</h2>
-    <iframe class="sheet-frame"
-      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pubhtml?gid=715722052&single=true">
-    </iframe>
-
-    <h2>Contributions</h2>
-    <iframe class="sheet-frame"
-      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pubhtml?gid=2096610384&single=true">
-    </iframe>
+    <div id="finesTable">Loading...</div>
   </section>
 
-  <!-- Footer (same as index.html) -->
-  <footer>
-    <p>📧 Email: texasgroup18@gmail.com | 📞 Contact: 8856967466</p>
-    <p>&copy; 2025 Texas Group. All Rights Reserved.</p>
-  </footer>
+  <section>
+    <h2>Expenses</h2>
+    <div id="expensesTable">Loading...</div>
+  </section>
 
+  <section>
+    <h2>Contributions</h2>
+    <div id="contribTable">Loading...</div>
+  </section>
+
+  <script>
+    // CSV URLs
+    const finesUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pub?gid=0&single=true&output=csv";
+    const expensesUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pub?gid=715722052&single=true&output=csv";
+    const contribUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_rdpztfVyLrlPgSWmNIuGhLeo-g4n9Pw4Zdz0gz92pIXA9eaowq-d-g9GywvK8TlpZ1ET47i8czE8/pub?gid=2096610384&single=true&output=csv";
+
+    // Parse CSV
+    function parseCSV(str) {
+      return str.trim().split("\n").map(r => r.split(","));
+    }
+
+    function renderTable(data, containerId) {
+      let html = "<table>";
+      data.forEach((row, i) => {
+        html += "<tr>";
+        row.forEach(cell => {
+          html += i === 0 ? `<th>${cell}</th>` : `<td>${cell}</td>`;
+        });
+        html += "</tr>";
+      });
+      html += "</table>";
+      document.getElementById(containerId).innerHTML = html;
+    }
+
+    async function loadData() {
+      // Fines
+      let finesResp = await fetch(finesUrl);
+      let finesData = parseCSV(await finesResp.text());
+      renderTable(finesData, "finesTable");
+      let finesSum = finesData.slice(1).reduce((sum, row) => sum + (parseFloat(row[3]) || 0), 0);
+      document.getElementById("totalFines").textContent = finesSum.toFixed(2);
+
+      // Expenses
+      let expResp = await fetch(expensesUrl);
+      let expData = parseCSV(await expResp.text());
+      renderTable(expData, "expensesTable");
+      let expSum = expData.slice(1).reduce((sum, row) => sum + (parseFloat(row[2]) || 0), 0);
+      document.getElementById("totalExpenses").textContent = expSum.toFixed(2);
+
+      // Contributions
+      let contribResp = await fetch(contribUrl);
+      let contribData = parseCSV(await contribResp.text());
+      renderTable(contribData, "contribTable");
+      let contribSum = 0;
+      contribData.slice(1).forEach(row => {
+        row.slice(2).forEach(val => {
+          contribSum += parseFloat(val) || 0;
+        });
+      });
+      document.getElementById("totalContrib").textContent = contribSum.toFixed(2);
+
+      // Remaining balance
+      document.getElementById("remaining").textContent = (contribSum + finesSum - expSum).toFixed(2);
+    }
+
+    loadData();
+  </script>
 </body>
 </html>
